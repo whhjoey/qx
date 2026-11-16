@@ -1,0 +1,10 @@
+# ===============================================================
+#  rewrite 规则列表（被 main.conf 的 [rewrite_remote] 远程拉取）
+#  脚本本体放在自己仓库；下面引用 jsdelivr 镜像直链
+# ===============================================================
+
+# Readify AI 凭证捕获：先把 YOUR_NAME/YOUR_REPO 与后端域名替换好
+# 请求头阶段捕获 Authorization / X-Token / Cookie
+^https://你的后端域名/ url script-request-header https://cdn.jsdelivr.net/gh/YOUR_NAME/YOUR_REPO@main/readify_capture.js
+# 响应体阶段兜底捕获 token 字段
+^https://你的后端域名/ url script-response-body https://cdn.jsdelivr.net/gh/YOUR_NAME/YOUR_REPO@main/readify_capture.js
